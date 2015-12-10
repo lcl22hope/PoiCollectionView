@@ -1,5 +1,5 @@
 //
-//  CardCell.h
+//  PoiBriefHeader.h
 //  RewriteCollectionView
 //
 //  Created by lcl on 15/12/10.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CardCell : UITableViewCell
+@interface PoiBriefHeader : UIView
 
 @end

@@ -1,0 +1,16 @@
+//
+//  utility.pch
+//  RewriteCollectionView
+//
+//  Created by lcl on 15/12/10.
+//  Copyright © 2015年 lcl. All rights reserved.
+//
+
+#ifndef utility_pch
+#define utility_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "utility.h"
+#import <Masonry/Masonry.h>
+#endif /* utility_pch */
