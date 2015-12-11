@@ -7,45 +7,48 @@
 //
 
 #import "ViewMoreCell.h"
-@interface ViewMoreCell()
+#import "common.h"
+#import <Masonry/Masonry.h>
 
-@property (nonatomic, strong) UILabel* viewMore;
+@interface ViewMoreCell ()
+
+@property(nonatomic, strong) UILabel *viewMore;
 
 @end
 
 @implementation ViewMoreCell
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self.contentView addSubview:self.viewMore];
-        self.contentView.backgroundColor = [UIColor whiteColor];
-    }
-    
-    return self;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style
+              reuseIdentifier:(NSString *)reuseIdentifier {
+  if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+      self.contentView.backgroundColor = [UIColor whiteColor];
+
+      [self.contentView addSubview:self.viewMore];
+  }
+
+  return self;
 }
 
--(void)layoutSubviews{
-    [super layoutSubviews];
-    
-    
-    [self.viewMore makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView.centerX);
-        make.centerY.equalTo(self.contentView.centerY);
-        make.width.lessThanOrEqualTo(self.contentView.width);
-        make.height.equalTo(@15);
-    }];
+- (void)layoutSubviews {
+  [super layoutSubviews];
+
+  [self.viewMore makeConstraints:^(MASConstraintMaker *make) {
+    make.centerX.equalTo(self.contentView.centerX);
+    make.centerY.equalTo(self.contentView.centerY);
+    make.width.lessThanOrEqualTo(self.contentView.width);
+    make.height.equalTo(@15);
+  }];
 }
 
-
--(UILabel *)viewMore{
-    if (!_viewMore) {
-        _viewMore = [UILabel new];
-        _viewMore.text = @"VIEW MORE";
-        _viewMore.font = [UIFont systemFontOfSize:10.f];
-        _viewMore.textColor = [UIColor darkTextColor];
-        _viewMore.textAlignment = NSTextAlignmentCenter;
-    }
-    return _viewMore;
+- (UILabel *)viewMore {
+  if (!_viewMore) {
+    _viewMore = [UILabel new];
+    _viewMore.text = @"VIEW MORE";
+    _viewMore.font = [UIFont systemFontOfSize:10.f];
+    _viewMore.textColor = [UIColor darkTextColor];
+    _viewMore.textAlignment = NSTextAlignmentCenter;
+  }
+  return _viewMore;
 }
 
 @end

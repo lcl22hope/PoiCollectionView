@@ -8,46 +8,75 @@
 
 #import "PoiBriefSectionView.h"
 
-@interface PoiBriefSectionView(){
-    UIEdgeInsets inset;
-}
 
-@property (nonatomic, strong) UILabel* brief;
+
+@interface PoiBriefSectionView ()
+
+@property(nonatomic, strong) UILabel *label;
+@property(nonatomic, assign) UIEdgeInsets sectionInset;
 
 @end
 
 @implementation PoiBriefSectionView
 
--(instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
-        [self.contentView addSubview:self.brief];
+        [self.contentView addSubview:self.label];
         self.contentView.backgroundColor = [UIColor whiteColor];
-        inset = UIEdgeInsetsMake(15.f, 15.f, 15.f, 15.f);
+        self.sectionInset = UIEdgeInsetsMake(15.f, 15.f, 15.f, 15.f);
+        
+        MASAttachKeys(self.label);
     }
     return self;
 }
 
--(void)layoutSubviews{
-    [super layoutSubviews];
+-(void)drawRect:(CGRect)rect{
+    if (!_isUnfold) {
+        UIBezierPath* roundPath = [UIBezierPath bezierPathWithRoundedRect:rect
+                                                        byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight
+                                                              cornerRadii:CGSizeMake(5, 5)];
+        CAShapeLayer *shape = [[CAShapeLayer alloc] init];
+        shape.backgroundColor = [UIColor clearColor].CGColor;
+        [shape setFrame:rect];
+        [shape setPath:roundPath.CGPath];
+        
+        self.layer.masksToBounds = YES;
+        self.layer.mask = shape;
+        shape.frame = self.layer.bounds;
+    }else{
+        UIBezierPath* roundPath = [UIBezierPath bezierPathWithRect:rect];
+        CAShapeLayer *shape = [[CAShapeLayer alloc] init];
+        shape.backgroundColor = [UIColor clearColor].CGColor;
+        [shape setFrame:rect];
+        [shape setPath:roundPath.CGPath];
+        
+        self.layer.masksToBounds = YES;
+        self.layer.mask = shape;
+        shape.frame = self.layer.bounds;
+    }
     
-    [self.brief makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView.centerX);
-        make.centerY.equalTo(self.contentView.centerY);
-        make.width.equalTo(self.contentView.width).offset(-(inset.left+inset.right));
-        make.height.equalTo(@28);
-    }];
 }
 
--(UILabel *)brief{
-    if (!_brief) {
-        _brief = [UILabel new];
-        _brief.text = @"Times Square is one of the world's visited tourist attractions,\
-                        drawing an estimated fifty million vistors annually";
-        _brief.textColor = [UIColor darkTextColor];
-        _brief.font = [UIFont systemFontOfSize:11.f];
-        _brief.numberOfLines = 2;
-    }
-    return _brief;
+- (void)layoutSubviews {
+  [super layoutSubviews];
+
+  [self.label makeConstraints:^(MASConstraintMaker *make) {
+    make.centerX.equalTo(self.contentView.centerX);
+    make.centerY.equalTo(self.contentView.centerY);
+    make.width.equalTo(@(SCREEN_WIDTH-20-30));
+    make.height.equalTo(@28);
+  }];
+}
+
+- (UILabel *)label {
+  if (!_label) {
+    _label = [UILabel new];
+    _label.text = @"Times Square is one of the world's visited tourist attractions,drawing an estimated fifty million vistors annually";
+    _label.textColor = [UIColor darkTextColor];
+    _label.font = [UIFont systemFontOfSize:11.f];
+    _label.numberOfLines = 2;
+  }
+  return _label;
 }
 
 @end

@@ -10,6 +10,6 @@
 
 @interface PoiBriefTableView : UITableView
 
-@property (nonatomic, assign) BOOL isUnfold;
+@property(nonatomic, assign) BOOL isUnfold;
 
 @end
