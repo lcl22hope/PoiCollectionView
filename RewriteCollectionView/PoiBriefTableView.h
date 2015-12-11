@@ -10,6 +10,6 @@
 
 @interface PoiBriefTableView : UITableView
 
-@property (nonatomic, strong) UIView* headerView;
+@property (nonatomic, assign) BOOL isUnfold;
 
 @end

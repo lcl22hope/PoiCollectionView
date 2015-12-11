@@ -31,7 +31,10 @@
     [super layoutSubviews];
     
     [self.brief makeConstraints:^(MASConstraintMaker *make) {
-        //
+        make.centerX.equalTo(self.contentView.centerX);
+        make.centerY.equalTo(self.contentView.centerY);
+        make.width.equalTo(self.contentView.width).offset(-(inset.left+inset.right));
+        make.height.equalTo(@28);
     }];
 }
 
